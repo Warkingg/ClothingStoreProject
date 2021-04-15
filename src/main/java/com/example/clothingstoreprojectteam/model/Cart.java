@@ -16,6 +16,7 @@ public class Cart {
     private String sessionId;
     private int quantity;
     private String status;
+    private String image;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
