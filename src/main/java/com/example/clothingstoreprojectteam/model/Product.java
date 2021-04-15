@@ -19,7 +19,7 @@ public class Product {
 
     private int quantity;
 
-    private String size
+    private String size;
 
     private String description;
 
