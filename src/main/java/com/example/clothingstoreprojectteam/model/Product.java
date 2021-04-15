@@ -19,9 +19,7 @@ public class Product {
 
     private int quantity;
 
-    private String size;
-
-    private String category;
+    private String size
 
     private String description;
 
@@ -35,7 +33,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name="category_id")
-    private Product product;
+    private Category category;
 
 
 }
