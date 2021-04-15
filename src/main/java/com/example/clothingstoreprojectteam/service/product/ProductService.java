@@ -3,12 +3,15 @@ package com.example.clothingstoreprojectteam.service.product;
 import com.example.clothingstoreprojectteam.model.Product;
 import com.example.clothingstoreprojectteam.repository.IProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 public class ProductService implements IProductService {
+
     @Autowired
     private IProductRepository productRepository;
 
@@ -24,11 +27,18 @@ public class ProductService implements IProductService {
 
     @Override
     public Optional<Product> findById(Long id) {
-        return Optional.empty();
+        return productRepository.findById(id);
     }
 
     @Override
     public void remove(Long id) {
+        productRepository.deleteById(id);
+    }
 
+    @Override
+    public Page<Product> findAllByNameContaining(String name, Pageable pageable) {
+        return productRepository.findAllByNameContaining(name,pageable);
     }
 }
+
+

@@ -1,4 +1,4 @@
-package com.example.clothingstoreprojectteam.service.product;
+package com.example.clothingstoreprojectteam.service;
 
 import java.util.Optional;
 
