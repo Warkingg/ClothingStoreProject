@@ -27,6 +27,8 @@ public class Product {
 
     private String imgUrl;
 
+
+
     @ManyToOne
     @JoinColumn(name="customer_id")
     private Customer customer;
