@@ -1,4 +1,4 @@
-package model;
+package com.example.clothingstoreprojectteam.model;
 
 import lombok.Data;
 
@@ -24,6 +24,8 @@ public class Product {
     private String category;
 
     private String description;
+
+    private String imgUrl;
 
     @ManyToOne
     @JoinColumn(name="customer_id")

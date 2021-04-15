@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<link rel='stylesheet' href='/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css'>
+<head th:replace="/layout :: head">
+</head>
+<body>
+<h3>Customers</h3>
+<p>
+    <a th:href="@{/create-customer}">
+        Add new customer
+    </a>
+</p>
+<div class="container">
+    <div class="row">
+        <div class="col align-self-end">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search by first name" aria-label="Search" name="s">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<table id = "customers">
+    <thead>
+    <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Province</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="customer : ${customers}">
+        <tr>
+            <td th:text="${customer.firstName}"></td>
+            <td th:text="${customer.lastName}"></td>
+            <td th:text="${customer.province.name}"></td>
+            <td><a th:href="@{/edit-customer/__${customer.id}__ }">Edit</a></td>
+            <td><a th:href="@{/delete-customer/__${customer.id}__ }">Delete</a></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            <li class="page-item">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true" th:href="@{'/customers'(page=${customers.number - 1})}" th:if="${customers.hasPrevious()}">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" th:href="@{'/customers'(page=${customers.number - 1})}" th:text="${customers.number + 1}"></a></li>
+            <li class="page-item"><a class="page-link" th:href="@{'/customers'(page=${customers.number + 1})}" th:text="${customers.totalPages}"></a></li>
+            <li class="page-item">
+                <a class="page-link" th:href="@{'/customers'(page=${customers.number + 1})}" th:if="${customers.hasNext()}">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<footer th:replace="/layout :: footer">
+</footer>
+</body>
+</html>
