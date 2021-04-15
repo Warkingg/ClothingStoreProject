@@ -25,7 +25,9 @@ public class Product {
 
     private String description;
 
-    private String image;
+    private String imgUrl;
+
+
 
     @ManyToOne
     @JoinColumn(name="customer_id")
