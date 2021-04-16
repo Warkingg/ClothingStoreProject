@@ -92,7 +92,7 @@ public class ProductController {
     }
 
     @PostMapping("/edit")
-    public ModelAndView editProduct(@ModelAttribute ProductForm productForm) {
+    public ModelAndView updateProduct(@ModelAttribute ProductForm productForm) {
         Product product = new Product();
         MultipartFile multipartFile = productForm.getImage();
         String fileName = multipartFile.getOriginalFilename();
@@ -101,6 +101,7 @@ public class ProductController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        product.setId(productForm.getId());
         product.setName(productForm.getName());
         product.setPrice(productForm.getPrice());
         product.setQuantity(productForm.getQuantity());

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel='stylesheet' href='/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css'>
+<head th:replace="/layout :: head"></head>
+<body>
+<div class="container">
+  <div class="header">
+    <h3>Chỉnh sửa danh mục</h3>
+    <p>
+      <a th:href="@{/categories/list}">
+        Quay về danh sách danh mục
+      </a>
+    </p>
+    <div class="notify">
+      <div th:if="${message}">
+        <span th:text="${message}"></span>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <form action="#" th:action="@{/categories/edit}" th:object="${category}" method="post">
+      <div class="form-group">
+        <input type="hidden" class="form-control" id="id" aria-describedby="id" th:field="*{id}">
+      </div>
+      <div class="form-group">
+        <label for="inputName">Tên danh mục</label>
+        <input type="text" class="form-control" id="inputName" th:field="*{name}">
+      </div>
+      <button type="submit" class="btn btn-primary">Cập nhật sản phẩm</button>
+    </form>
+  </div>
+  <div class="footer">
+    <footer th:replace="/layout :: footer">
+    </footer>
+  </div>
+</div>
+</body>
+</html>
