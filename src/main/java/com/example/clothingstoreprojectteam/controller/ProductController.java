@@ -101,6 +101,7 @@ public class ProductController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        product.setId(productForm.getId());
         product.setName(productForm.getName());
         product.setPrice(productForm.getPrice());
         product.setQuantity(productForm.getQuantity());
