@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel='stylesheet' href='/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css'>
 <head th:replace="/layout :: head"></head>
 <body>
-<div class="container-fluid">
+<div class="container">
     <div class="header">
         <h3>Chỉnh sửa sản phẩm</h3>
         <p>
@@ -16,51 +17,47 @@
             </div>
         </div>
     </div>
-</div>
-<div class="content">
-    <form th:action="@{/products/edit}" th:object="${product}" method="post" enctype="multipart/form-data">
-        <input th:type="hidden" name="id" th:field="*{id}">
-        <div class="form-group">
-            <label for="inputName">Tên sản phẩm</label>
-            <input type="text" class="form-control" id="inputName" th:field="*{name}">
-        </div>
-        <div class="form-group">
-            <label for="inputPrice" class="col-sm-2 col-form-label">Giá sản phẩm</label>
-            <input type="text" class="form-control" id="inputPrice" th:field="*{price}"/>
-        </div>
-        <div class="form-group">
-            <label for="inputQuantity" class="col-sm-2 col-form-label">Số lượng sản phẩm</label>
-            <input type="text" class="form-control" id="inputQuantity" th:field="*{quantity}"/>
-        </div>
-        <div class="form-group">
-            <label for="inputImage" class="col-sm-2 col-form-label">Ảnh sản phẩm</label>
-            <input type="file" class="form-control" id="inputImage" th:field="*{image}"/>
-        </div>
-        <div class="form-group">
-            <label for="inputDescription" class="col-sm-2 col-form-label">Mô tả sản phẩm</label>
-            <input type="text" class="form-control" id="inputDescription" th:field="*{description}"/>
-        </div>
-            <tr>
-                <td>Danh mục sản phẩm:</td>
-                <td>
+    <div class="content">
+        <form action="#" th:action="@{/products/edit}" th:object="${product}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="id" aria-describedby="id" th:field="*{id}">
+            </div>
+            <div class="form-group">
+                <label for="inputName">Tên sản phẩm</label>
+                <input type="text" class="form-control" id="inputName" th:field="*{name}">
+            </div>
+            <div class="form-group">
+                <label for="inputPrice" class="col-sm-2 col-form-label">Giá sản phẩm</label>
+                <input type="text" class="form-control" id="inputPrice" th:field="*{price}"/>
+            </div>
+            <div class="form-group">
+                <label for="inputQuantity" class="col-sm-2 col-form-label">Số lượng sản phẩm</label>
+                <input type="text" class="form-control" id="inputQuantity" th:field="*{quantity}"/>
+            </div>
+            <div class="form-group">
+                <label for="inputImage" class="col-sm-2 col-form-label">Ảnh sản phẩm</label>
+                <input type="file" class="form-control" id="inputImage" th:field="*{image}"/>
+            </div>
+            <div class="form-group">
+                <label for="inputDescription" class="col-sm-2 col-form-label">Mô tả sản phẩm</label>
+                <input type="text" class="form-control" id="inputDescription" th:field="*{description}"/>
+            </div>
+           <div class="form-group">
+                <label>Danh mục sản phẩm:</label>
                     <select name="category">
                         <option th:each="c : ${categories}"
                                 th:value="${c.id}"
                                 th:text="${c.name}"
                                 th:selected="(${c.id} == *{category.id})"></option>
                     </select>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Cập nhật sản phẩm"></td>
-            </tr>
-        </table>
-    </form>
-</div>
-<div class="footer">
-<footer th:replace="/layout :: footer">
-</footer>
+                </div>
+            <input type="submit" class="btn btn-primary">Cập nhật sản phẩm</button>
+        </form>
+    </div>
+    <div class="footer">
+        <footer th:replace="/layout :: footer">
+        </footer>
+    </div>
 </div>
 </body>
 </html>

@@ -5,10 +5,10 @@
 <body>
 <div class="container">
     <div class="header">
-        <h3>Tạo Sản Phẩm mới</h3>
+        <h3>Tạo sản phẩm mới</h3>
         <p>
             <a th:href="@{/products/list}">
-                Back to customer list
+                Quay về danh sách sản phẩm
             </a>
         </p>
         <div class="notify">
@@ -48,7 +48,7 @@
                     <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"></option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Tạo sản phẩm mới</button>
+            <button class="btn btn-primary">Tạo sản phẩm mới</button>
         </form>
     </div>
     <div class="footer">
