@@ -50,6 +50,20 @@
     </th:block>
     </tbody>
 </table>
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            <li class="page-item">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true" th:href="@{'/products/list'(page=${products.number - 1})}" th:if="${products.hasPrevious()}">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" th:href="@{'/products/list'(page=${products.number - 1})}" th:text="${products.number + 1}"></a></li>
+            <li class="page-item"><a class="page-link" th:href="@{'/products/list'(page=${products.number + 1})}" th:text="${products.totalPages}"></a></li>
+            <li class="page-item">
+                <a class="page-link" th:href="@{'/products/list'(page=${products.number + 1})}" th:if="${products.hasNext()}">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
 <footer th:replace="/layout :: footer">
 </footer>
 </body>

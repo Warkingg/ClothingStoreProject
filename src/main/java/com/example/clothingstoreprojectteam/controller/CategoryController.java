@@ -81,5 +81,4 @@ public class CategoryController {
         categoryService.remove(category.getId());
         return "redirect:/categories/list";
     }
-
 }

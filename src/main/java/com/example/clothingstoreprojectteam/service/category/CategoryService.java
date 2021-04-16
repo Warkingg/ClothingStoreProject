@@ -3,6 +3,8 @@ package com.example.clothingstoreprojectteam.service.category;
 import com.example.clothingstoreprojectteam.model.Category;
 import com.example.clothingstoreprojectteam.repository.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,6 +18,11 @@ public class CategoryService implements ICategoryService {
     @Override
     public Iterable<Category> findAll() {
         return categoryRepository.findAll();
+    }
+
+    @Override
+    public Page<Category> findAll(Pageable pageable) {
+        return categoryRepository.findAll(pageable);
     }
 
     @Override
