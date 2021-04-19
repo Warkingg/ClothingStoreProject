@@ -16,6 +16,7 @@
     <th>Tên Danh Mục</th>
     <th>Chỉnh Sửa</th>
     <th>Xóa</th>
+    <th>Chi tiết</th>
   </tr>
   </thead>
   <tbody>
@@ -24,6 +25,7 @@
       <td th:text="${category.name}"></td>
       <td><a th:href="@{/categories/edit/__${category.id}__}">Chỉnh Sửa</a></td>
       <td><a th:href="@{/categories/delete/__${category.id}__}">Xóa</a></td>
+      <td><a th:href="@{/categories/{id}/view(id=${category.id})}">Chi Tiết</a></td>
     </tr>
   </th:block>
   </tbody>

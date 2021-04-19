@@ -1,5 +1,6 @@
 package com.example.clothingstoreprojectteam.service;
 
+import com.example.clothingstoreprojectteam.model.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,4 +16,5 @@ public interface IGeneralService<T> {
     Optional<T> findById(Long id);
 
     void remove(Long id);
+
 }
