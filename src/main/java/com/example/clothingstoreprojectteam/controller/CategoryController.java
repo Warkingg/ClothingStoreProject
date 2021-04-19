@@ -1,9 +1,13 @@
 package com.example.clothingstoreprojectteam.controller;
 
 import com.example.clothingstoreprojectteam.model.Category;
+import com.example.clothingstoreprojectteam.model.Product;
 import com.example.clothingstoreprojectteam.service.category.ICategoryService;
 
+import com.example.clothingstoreprojectteam.service.product.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +21,9 @@ public class CategoryController {
 
     @Autowired
     private ICategoryService categoryService;
+
+    @Autowired
+    private IProductService productService;
 
     @GetMapping("/list")
     public ModelAndView showAll() {
@@ -80,5 +87,17 @@ public class CategoryController {
     public String deleteProduct(@ModelAttribute Category category) {
         categoryService.remove(category.getId());
         return "redirect:/categories/list";
+    }
+    @GetMapping("/{id}/view")
+    public ModelAndView showCategoryInformation(@PathVariable("id") Long id,Pageable pageable){
+        Optional<Category> categoryOptional = categoryService.findById(id);
+        if(!categoryOptional.isPresent()){
+            return new ModelAndView("/error-404");
+        }
+        Page<Product> products = productService.findAllByCategory(categoryOptional.get(),pageable);
+        ModelAndView modelAndView = new ModelAndView("/category/view");
+        modelAndView.addObject("category",categoryOptional.get());
+        modelAndView.addObject("products",products);
+        return modelAndView;
     }
 }
