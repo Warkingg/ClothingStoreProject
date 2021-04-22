@@ -149,9 +149,9 @@
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-form"><!--login form-->
 						<h2>Login to your account</h2>
-						<form action="#">
-							<input type="text" placeholder="Name" />
-							<input type="email" placeholder="Email Address" />
+						<form th:action="@{/login}" method="post" th:object="${customer}">
+							<input th:field="*{username}" type="text" placeholder="UserName" />
+							<input th:field="*{password}" type="password" placeholder="PassWord" />
 							<span>
 								<input type="checkbox" class="checkbox"> 
 								Keep me signed in
@@ -166,10 +166,19 @@
 				<div class="col-sm-4">
 					<div class="signup-form"><!--sign up form-->
 						<h2>New User Signup!</h2>
-						<form action="#">
-							<input type="text" placeholder="Name"/>
-							<input type="email" placeholder="Email Address"/>
-							<input type="password" placeholder="Password"/>
+						<form th:action="@{/register}" th:object="${customer}" method="post">
+							<input th:field="*{firstName}" type="text" placeholder="FirstName"/>
+							<input th:field="*{lastName}" type="text" placeholder="LastName"/>
+							<input th:field="*{username}" type="text" placeholder="Username"/>
+							<input th:field="*{password}" type="password" placeholder="Password"/>
+							<select style="margin-bottom: 8px" th:field="*{gender}">
+								<option th:value="Nam">Nam</option>
+								<option th:value="Nữ">Nữ</option>
+							</select>
+							<br>
+							<select th:field="*{province}"  style="margin-bottom: 8px">
+								<option th:each="province:${provinces}" th:value="${province.id}" th:text="${province.name}">Hà Nội</option>
+							</select>
 							<button type="submit" class="btn btn-default">Signup</button>
 						</form>
 					</div><!--/sign up form-->

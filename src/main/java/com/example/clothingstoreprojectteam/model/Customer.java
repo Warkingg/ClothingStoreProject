@@ -3,6 +3,7 @@ package com.example.clothingstoreprojectteam.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
@@ -18,7 +19,22 @@ public class Customer {
 
     private String gender;
 
-    private String address;
+    @Column(unique = true)
+    private String username;
+
+    private String password;
+
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "customer_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roleSet;
+
+    @ManyToOne
+    @JoinColumn(name = "province_Id")
+    private Province province;
 
     @OneToOne
     @JoinColumn(name="cart_id")
