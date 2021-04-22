@@ -61,6 +61,13 @@ public class Cart {
         }
     }
 
+    //xoa tat ca sp
+    public void clear(){
+        items.clear();
+        total = 0;
+    }
+
+
 
 
 
