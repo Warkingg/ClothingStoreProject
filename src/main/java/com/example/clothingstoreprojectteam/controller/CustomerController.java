@@ -88,4 +88,20 @@ public class CustomerController {
         }
            return "login";
     }
+
+    @GetMapping("/user/information")
+    public ModelAndView users(@ModelAttribute("username") String username,ModelAndView modelAndView){
+      if (username!=null){
+          Customer customer = iCustomerService.findByUsername(username);
+          modelAndView = new ModelAndView("information");
+          modelAndView.addObject("informationCustomer",customer);
+          return modelAndView;
+      }
+      return new ModelAndView("login");
+    }
+    @PostMapping("user/edit")
+    public String edit(@ModelAttribute Customer customer){
+        iCustomerService.save(customer);
+        return "redirect:/user/information";
+    }
 }
