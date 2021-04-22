@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import sun.security.mscapi.CPublicKey;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,7 +26,23 @@ public class CartController {
     public String add(HttpSession session, @RequestParam("id") Long id, @RequestParam(value = "qty" , required = false, defaultValue = "1")int qty){
         Product product = productService.get(id);
         Cart cart =  cartService.getCart(session);
+        cart.addItem(product,qty);
+        return "cart";
+    }
+
+    @GetMapping("/remove")
+    public String remove(HttpSession session, @RequestParam ("id") Long id){
+        Product product = productService.get(id);
+        Cart cart =  cartService.getCart(session);
         cart.removeItem(product);
+        return "cart";
+    }
+
+    @GetMapping("/update")
+        public String update(HttpSession session ,@RequestParam("id") Long id, @RequestParam("qty") int qty){
+        Product product = productService.get(id);
+        Cart cart =  cartService.getCart(session);
+        cart.updateItem(product,qty);
         return "cart";
     }
 }
