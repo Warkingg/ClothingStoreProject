@@ -53,6 +53,13 @@ public class Cart {
         }
     }
 
+    //xoa sp
+    public void removeItem(Product p ){
+        CartItem item = getItem(p);
+        if(item!= null){
+            items.remove(item);
+        }
+    }
 
 
 
