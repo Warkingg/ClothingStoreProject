@@ -1,9 +1,6 @@
 package com.example.clothingstoreprojectteam.controller;
 
-import com.example.clothingstoreprojectteam.model.Cart;
-import com.example.clothingstoreprojectteam.model.Customer;
-import com.example.clothingstoreprojectteam.model.Province;
-import com.example.clothingstoreprojectteam.model.Role;
+import com.example.clothingstoreprojectteam.model.*;
 import com.example.clothingstoreprojectteam.repository.IRoleRepository;
 import com.example.clothingstoreprojectteam.service.Customer.ICustomerService;
 import com.example.clothingstoreprojectteam.service.Province.IProvinceService;
@@ -15,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,6 +29,14 @@ public class CustomerController {
     @Autowired
     private IRoleService iRoleService;
 
+    @ModelAttribute("username")
+    public String username(Principal userPrinciple){
+        if (userPrinciple!=null){
+            return userPrinciple.getName();
+        }
+        return null;
+    }
+
     @ModelAttribute("customer")
     public Customer customer(){
         return new Customer();
@@ -43,6 +50,11 @@ public class CustomerController {
     @GetMapping("/login")
     public ModelAndView login(){
         return new ModelAndView("login");
+    }
+
+    @GetMapping("/shop")
+    public String shop(){
+        return "shop";
     }
 
     @GetMapping("/")
@@ -67,17 +79,13 @@ public class CustomerController {
     }
 
     @PostMapping("signIn")
-    public ModelAndView login(@ModelAttribute Customer customer , ModelAndView modelAndView){
+    public String login(@ModelAttribute Customer customer , ModelAndView modelAndView ){
         Customer checkCustomer = iCustomerService.findByUsername(customer.getUsername());
         if (checkCustomer.getUsername().equals(customer.getUsername())){
             if (passwordEncoder.matches(customer.getPassword(),checkCustomer.getPassword())){
-                modelAndView = new ModelAndView("shop");
-                String message = "Hello "+checkCustomer.getFirstName();
-                modelAndView.addObject("message",message);
+               return "redirect:/shop";
             }
-        }else {
-            modelAndView = new ModelAndView("login");
         }
-        return modelAndView;
+           return "login";
     }
 }
