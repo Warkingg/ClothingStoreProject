@@ -47,7 +47,7 @@ public class CustomerController {
 
     @GetMapping("/")
     public ModelAndView home(){
-        return new ModelAndView("index");
+        return new ModelAndView("shop");
     }
 
     @PostMapping("register")
