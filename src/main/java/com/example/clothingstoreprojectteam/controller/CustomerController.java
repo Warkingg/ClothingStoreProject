@@ -1,13 +1,12 @@
 package com.example.clothingstoreprojectteam.controller;
 
-import com.example.clothingstoreprojectteam.model.Cart;
-import com.example.clothingstoreprojectteam.model.Customer;
-import com.example.clothingstoreprojectteam.model.Province;
-import com.example.clothingstoreprojectteam.model.Role;
+import com.example.clothingstoreprojectteam.model.*;
 import com.example.clothingstoreprojectteam.repository.IRoleRepository;
 import com.example.clothingstoreprojectteam.service.Customer.ICustomerService;
 import com.example.clothingstoreprojectteam.service.Province.IProvinceService;
 import com.example.clothingstoreprojectteam.service.Role.IRoleService;
+import com.example.clothingstoreprojectteam.service.category.ICategoryService;
+import com.example.clothingstoreprojectteam.service.product.IProductService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,6 +30,16 @@ public class CustomerController {
     private IProvinceService iProvinceService;
     @Autowired
     private IRoleService iRoleService;
+    @Autowired
+    private IProductService productService;
+
+    @ModelAttribute("username")
+    public String username(Principal userPrinciple){
+        if (userPrinciple!=null){
+            return userPrinciple.getName();
+        }
+        return null;
+    }
 
     @ModelAttribute("customer")
     public Customer customer(){
@@ -40,14 +51,24 @@ public class CustomerController {
         return (List<Province>) iProvinceService.findAll();
     }
 
+    @ModelAttribute("products")
+        public List<Product> products(){
+        return (List<Product>) productService.findAll();
+    }
+
     @GetMapping("/login")
     public ModelAndView login(){
         return new ModelAndView("login");
     }
 
+    @GetMapping("/shop")
+    public String shop(){
+        return "shop";
+    }
+
     @GetMapping("/")
     public ModelAndView home(){
-        return new ModelAndView("index");
+        return new ModelAndView("shop");
     }
 
     @PostMapping("register")
@@ -67,17 +88,29 @@ public class CustomerController {
     }
 
     @PostMapping("signIn")
-    public ModelAndView login(@ModelAttribute Customer customer , ModelAndView modelAndView){
+    public String login(@ModelAttribute Customer customer , ModelAndView modelAndView ){
         Customer checkCustomer = iCustomerService.findByUsername(customer.getUsername());
         if (checkCustomer.getUsername().equals(customer.getUsername())){
             if (passwordEncoder.matches(customer.getPassword(),checkCustomer.getPassword())){
-                modelAndView = new ModelAndView("shop");
-                String message = "Hello "+checkCustomer.getFirstName();
-                modelAndView.addObject("message",message);
+               return "redirect:/shop";
             }
-        }else {
-            modelAndView = new ModelAndView("login");
         }
-        return modelAndView;
+           return "login";
+    }
+
+    @GetMapping("/user/information")
+    public ModelAndView users(@ModelAttribute("username") String username,ModelAndView modelAndView){
+      if (username!=null){
+          Customer customer = iCustomerService.findByUsername(username);
+          modelAndView = new ModelAndView("information");
+          modelAndView.addObject("informationCustomer",customer);
+          return modelAndView;
+      }
+      return new ModelAndView("login");
+    }
+    @PostMapping("user/edit")
+    public String edit(@ModelAttribute Customer customer){
+        iCustomerService.save(customer);
+        return "redirect:/user/information";
     }
 }

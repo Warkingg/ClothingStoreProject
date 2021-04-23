@@ -41,7 +41,7 @@ public class ProductController {
 
 
     @GetMapping("/list")
-    public ModelAndView showAll(@RequestParam("s") Optional<String> name, @PageableDefault(size = 5) Pageable pageable) {
+    public ModelAndView showAll(@RequestParam("s") Optional<String> name, @PageableDefault(size = 9) Pageable pageable) {
         Page<Product> products;
         if (name.isPresent()){
             String query = "%" + name.get() + "%";
@@ -141,8 +141,21 @@ public class ProductController {
         productService.remove(product.getId());
         return "redirect:/products/list";
     }
+    @GetMapping("/{id}/description")
+    public ModelAndView showProductInformation(@PathVariable ("id") Long id){
+        Optional<Product> productOptional = productService.findById(id);
+        ModelAndView modelAndView;
+        if (productOptional.isPresent()) {
+            modelAndView = new ModelAndView("/product/description");
+            modelAndView.addObject("product", productOptional.get());
+        } else {
+            modelAndView = new ModelAndView("/error-404");
+        }
+        return modelAndView;
+    }
 
-}
+    }
+
 
 
 

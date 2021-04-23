@@ -42,7 +42,11 @@
             <td th:text="${product.quantity}"></td>
             <td th:text="${product.category != null ? product.category.name : ''}"></td>
             <td>
+<<<<<<< HEAD
                 <img th:src="@{'../image/' + ${product.imgUrl}}" width="50" height="50">
+=======
+                <img th:src="@{'../img/' + ${product.imgUrl}}" width="50" height="50">
+>>>>>>> 740c9f28d40a4c6c58372c78575f34dfcffed89c
             </td>
             <td th:text="${product.description}"></td>
             <td><a th:href="@{/products/edit/__${product.id}__ }">Chỉnh sửa</a></td>
@@ -61,7 +65,7 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-end">
             <li class="page-item">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true" th:href="@{'/products/list'(page=${products.number - 1})}" th:if="${products.hasPrevious()}">Previous</a>
+                <a class="page-link" tabindex="-1" aria-disabled="true" th:href="@{'/products/list'(page=${products.number - 1})}" th:if="${products.hasPrevious()}">Previous</a>
             </li>
             <li class="page-item"><a class="page-link" th:href="@{'/products/list'(page=${products.number - 1})}" th:text="${products.number + 1}"></a></li>
             <li class="page-item"><a class="page-link" th:href="@{'/products/list'(page=${products.number + 1})}" th:text="${products.totalPages}"></a></li>
