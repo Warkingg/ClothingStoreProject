@@ -31,6 +31,7 @@
         <th>Mô tả sản phẩm</th>
         <th>Chỉnh sửa</th>
         <th>Xóa</th>
+        <th>add cart</th>
     </tr>
     </thead>
     <tbody>
@@ -41,11 +42,17 @@
             <td th:text="${product.quantity}"></td>
             <td th:text="${product.category != null ? product.category.name : ''}"></td>
             <td>
-                <img th:src="@{'../' + ${product.imgUrl}}" width="50" height="50">
+                <img th:src="@{'../image/' + ${product.imgUrl}}" width="50" height="50">
             </td>
             <td th:text="${product.description}"></td>
             <td><a th:href="@{/products/edit/__${product.id}__ }">Chỉnh sửa</a></td>
             <td><a th:href="@{/products/delete/__${product.id}__ }">Xóa</a></td>
+            <td>
+                <form th:action="@{/cart/add}" method="post">
+                    <input type="hidden" th:value="${product.id}" name="id"/>
+                    <button type="submit">Add to cart</button>
+                </form>
+            </td>
         </tr>
     </th:block>
     </tbody>
