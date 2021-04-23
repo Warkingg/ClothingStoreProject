@@ -59,7 +59,7 @@ public class ProductService implements IProductService {
 
     @Override
     public Product get(Long id) {
-        return null;
+        return productRepository.findById(id).get();
     }
 
 }

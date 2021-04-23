@@ -22,21 +22,31 @@ private float subTotal;
 
     public float getSubTotal() {
         subTotal = product.getPrice() * quantity;
-        return quantity;
+        return subTotal;
     }
 
     public void setSubTotal(float subTotal) {
         this.subTotal = subTotal;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "item_product",
-            joinColumns = @JoinColumn(name = "item_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    @ManyToOne
-    private Cart cart;
+//    public float getSubTotal() {
+//        subTotal = product.getPrice() * quantity;
+//        return quantity;
+//    }
+//
+//    public void setSubTotal(float subTotal) {
+//        this.subTotal = subTotal;
+//    }
+
+
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "item_product",
+//            joinColumns = @JoinColumn(name = "item_id"),
+//            inverseJoinColumns = @JoinColumn(name = "product_id")
+//    )
+//    @ManyToOne
+//    private Cart cart;
 
     public CartItem(Product product)  {
         this.product = product;

@@ -72,7 +72,7 @@ public class ProductController {
         }
         Product product = new Product();
         product.setName(productForm.getName());
-        product.setPrice(productForm.getPrice());
+        product.setPrice((float) productForm.getPrice());
         product.setQuantity(productForm.getQuantity());
         product.setDescription(productForm.getDescription());
         product.setImgUrl(fileName);
@@ -112,7 +112,7 @@ public class ProductController {
         }
         product.setId(productForm.getId());
         product.setName(productForm.getName());
-        product.setPrice(productForm.getPrice());
+        product.setPrice((float) productForm.getPrice());
         product.setQuantity(productForm.getQuantity());
         product.setDescription(productForm.getDescription());
         product.setImgUrl(fileName);

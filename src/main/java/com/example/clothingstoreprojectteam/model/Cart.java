@@ -68,6 +68,17 @@ public class Cart {
     }
 
 
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
+
+    public double getTotal() {
+        total = 0;
+        for (CartItem item : items) {
+            total += item.getSubTotal();
+        }
+        return total;
+    }
 
 
 

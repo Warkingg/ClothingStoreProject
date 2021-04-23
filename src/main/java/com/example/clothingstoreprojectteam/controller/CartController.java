@@ -22,7 +22,7 @@ public class CartController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/add")
+    @RequestMapping("/add")
     public String add(HttpSession session, @RequestParam("id") Long id, @RequestParam(value = "qty" , required = false, defaultValue = "1")int qty){
         Product product = productService.get(id);
         Cart cart =  cartService.getCart(session);
@@ -30,7 +30,7 @@ public class CartController {
         return "cart";
     }
 
-    @GetMapping("/remove")
+    @RequestMapping("/remove")
     public String remove(HttpSession session, @RequestParam ("id") Long id){
         Product product = productService.get(id);
         Cart cart =  cartService.getCart(session);
@@ -38,7 +38,7 @@ public class CartController {
         return "cart";
     }
 
-    @GetMapping("/update")
+    @RequestMapping("/update")
         public String update(HttpSession session ,@RequestParam("id") Long id, @RequestParam("qty") int qty){
         Product product = productService.get(id);
         Cart cart =  cartService.getCart(session);

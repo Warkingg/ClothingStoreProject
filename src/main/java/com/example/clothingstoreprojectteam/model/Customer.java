@@ -36,8 +36,8 @@ public class Customer {
     @JoinColumn(name = "province_Id")
     private Province province;
 
-    @OneToOne
-    @JoinColumn(name="cart_id")
-    private Cart cart;
+//    @OneToOne
+//    @JoinColumn(name="cart_id")
+//    private Cart cart;
 
 }
