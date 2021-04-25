@@ -32,8 +32,8 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href=""><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-								<li><a href=""><i class="fa fa-envelope"></i> info@domain.com</a></li>
+								<li><a href=""><i class="fa fa-phone"></i> 0985978032</a></li>
+								<li><a href=""><i class="fa fa-envelope"></i> tamthanhsk25@gmail.com</a></li>
 							</ul>
 						</div>
 					</div>
@@ -113,9 +113,9 @@
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="index.html">Home</a></li>
-								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+								<li class="dropdown"><a href="#" class="active">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">Products</a></li>
+                                        <li><a th:href="@{/cart/shops}">Products</a></li>
 										<li><a href="product-details.html">Product Details</a></li> 
 										<li><a href="checkout.html">Checkout</a></li> 
 										<li><a href="cart.html" class="active">Cart</a></li> 
@@ -166,7 +166,7 @@
 					<tbody>
 					<tr th:each="item : ${session.giohang.items}">
 						<td>
-							<img th:src="@{'../image/' + ${item.product.imgUrl}}" width="110" height="110">
+							<img th:src="@{'../img/' + ${item.product.imgUrl}}" width="110" height="110">
 						</td>
 						<td >
 							<span th:text="${item.product.name}"></span> <br>
@@ -174,18 +174,13 @@
 						</td>
 						<td><span th:text="${item.product.price}"></span></td>
 						<td>
-							<form action="#" th:action="@{/cart/update}" method="post">
-								<input type="hidden" th:value="${item.product.id}" name="id"/>
-								<input type="number" min="1" th:value="${item.quantity}" name="qty" style="width:25%;">
-								<button type="submit" style="margin-left: 15px">update</button>
-							</form>
+							<button th:id="'btm'+ ${item.product.id}" style="margin-left: 15px" onclick="increase2(id)">-</button>
+							<span th:id="'qtn' + ${item.product.id}" th:text="${item.quantity}"></span>
+							<button th:id="'btp'+${item.product.id}" style="margin-left: 15px" onclick="increase(id)">+</button>
 						</td>
-						<td><span th:text="${item.subTotal}"></span></td>
+						<td><span th:id="'st' + ${item.product.id}" th:text="${item.subTotal}" ></span></td>
 						<td>
-							<form action="#" th:action="@{/cart/remove}" method="post">
-								<input type="hidden" th:value="${item.product.id}" name="id"/>
-								<button type="submit">remove</button>
-							</form>
+								<button th:id="'rm'+ ${item.product.id}" onclick="remove(id)">remove</button>
 						</td>
 					</tr>
 					</tbody>
@@ -230,7 +225,7 @@
 									<option>Canada</option>
 									<option>Dubai</option>
 								</select>
-								
+
 							</li>
 							<li class="single_field">
 								<label>Region / State:</label>
@@ -244,7 +239,7 @@
 									<option>Canada</option>
 									<option>Dubai</option>
 								</select>
-							
+
 							</li>
 							<li class="single_field zip-field">
 								<label>Zip Code:</label>
@@ -257,14 +252,14 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="total_area">
-						<ul>>
+						<ul>
 							<li>Cart Sub Total<span th:text="${session.giohang.total}"></span></li>
 							<li>Eco Tax <span>$2</span></li>
 							<li>Shipping Cost <span>Free</span></li>
 							<li>Total <span th:text="${session.giohang.total}"></span></li>
 						</ul>
 							<a class="btn btn-default update" href="">Update</a>
-							<a class="btn btn-default check_out" href="">Check Out</a>
+							<a class="btn btn-default check_out" th:href="@{/checkout1.html}">Check Out</a>
 					</div>
 				</div>
 			</div>
@@ -436,5 +431,8 @@
 	<script src="/js/jquery.scrollUp.min.js"></script>
     <script src="/js/jquery.prettyPhoto.js"></script>
     <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
+	<script src="/js/remove.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </body>
 </html>
