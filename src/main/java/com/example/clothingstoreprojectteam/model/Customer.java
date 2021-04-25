@@ -40,10 +40,6 @@ public class Customer implements Validator {
     @JoinColumn(name = "province_Id")
     private Province province;
 
-    @OneToOne
-    @JoinColumn(name="cart_id")
-    private Cart cart;
-
     @Override
     public boolean supports(Class<?> clazz) {
         return Customer.class.isAssignableFrom(clazz);
