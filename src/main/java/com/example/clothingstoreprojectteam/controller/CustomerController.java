@@ -5,6 +5,8 @@ import com.example.clothingstoreprojectteam.repository.IRoleRepository;
 import com.example.clothingstoreprojectteam.service.Customer.ICustomerService;
 import com.example.clothingstoreprojectteam.service.Province.IProvinceService;
 import com.example.clothingstoreprojectteam.service.Role.IRoleService;
+import com.example.clothingstoreprojectteam.service.category.ICategoryService;
+import com.example.clothingstoreprojectteam.service.product.IProductService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,6 +33,8 @@ public class CustomerController {
     private IProvinceService iProvinceService;
     @Autowired
     private IRoleService iRoleService;
+    @Autowired
+    private IProductService productService;
 
     @ModelAttribute("username")
     public String username(Principal userPrinciple){
@@ -50,6 +54,11 @@ public class CustomerController {
         return (List<Province>) iProvinceService.findAll();
     }
 
+    @ModelAttribute("products")
+        public List<Product> products(){
+        return (List<Product>) productService.findAll();
+    }
+
     @GetMapping("/login")
     public ModelAndView login(){
         return new ModelAndView("login");
@@ -62,7 +71,7 @@ public class CustomerController {
 
     @GetMapping("/")
     public ModelAndView home(){
-        return new ModelAndView("index");
+        return new ModelAndView("shop");
     }
 
     @PostMapping("register")

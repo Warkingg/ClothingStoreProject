@@ -1,5 +1,6 @@
 package com.example.clothingstoreprojectteam.service.product;
 
+import com.example.clothingstoreprojectteam.model.Category;
 import com.example.clothingstoreprojectteam.model.Product;
 import com.example.clothingstoreprojectteam.repository.IProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,12 @@ public class ProductService implements IProductService {
     public Page<Product> findAllProductByNameUsingQuery(String name, Pageable pageable) {
         return productRepository.findAllProductByNameUsingQuery(name,pageable);
     }
+
+    @Override
+    public Page<Product> findAllByCategory(Category category, Pageable pageable) {
+        return productRepository.findAllByCategory(category, pageable);
+    }
+
 
 }
 
