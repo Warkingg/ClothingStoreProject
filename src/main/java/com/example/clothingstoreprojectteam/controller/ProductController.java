@@ -40,6 +40,7 @@ public class ProductController {
     }
 
 
+
     @GetMapping("/list")
     public ModelAndView showAll(@RequestParam("s") Optional<String> name, @PageableDefault(size = 9) Pageable pageable) {
         Page<Product> products;
