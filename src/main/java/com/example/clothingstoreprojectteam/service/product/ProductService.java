@@ -57,6 +57,13 @@ public class ProductService implements IProductService {
         return productRepository.findAllByCategory(category, pageable);
     }
 
+<<<<<<< HEAD
+    @Override
+    public Product get(Long id) {
+        return productRepository.findById(id).get();
+    }
+=======
+>>>>>>> 740c9f28d40a4c6c58372c78575f34dfcffed89c
 
 }
 
