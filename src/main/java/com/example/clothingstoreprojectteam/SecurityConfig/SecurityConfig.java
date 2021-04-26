@@ -35,9 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.cors().disable();
 
-        http.authorizeRequests().antMatchers("signIn","/","/register","/login","/css/**","/js/**","/images/**","/fonts/**","/img/**","/shop").permitAll()
-                .antMatchers("/user**","/products**","/categories**").hasRole("USER")
-                .antMatchers("/admin**").hasRole("ADMIN")
+        http.authorizeRequests().antMatchers("signIn","/","/register","/login","/css/**","/js/**","/images/**","/fonts/**","/img/**","/shop","/cart/**").permitAll()
+                .antMatchers("/user/**","/categories/**").hasRole("USER")
+                .antMatchers("/admin/**","/products/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").successForwardUrl("/signIn").permitAll()
                 .and().logout().logoutSuccessUrl("/")
