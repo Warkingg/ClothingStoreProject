@@ -57,7 +57,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="index.html"><img src="images/home/logo.png" alt="" /></a>
+							<a th:href="@{/shop}"><img src="images/home/logo.png" alt="" /></a>
 						</div>
 						<div class="btn-group pull-right">
 							<div class="btn-group">
@@ -112,7 +112,7 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.html">Home</a></li>
+								<li><a th:href="@{/shop}">Home</a></li>
 								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="shop.html">Products</a></li>
@@ -156,7 +156,7 @@
 								<input type="checkbox" class="checkbox"> 
 								Keep me signed in
 							</span>
-							</span><a>login to admin</a></span>
+							<span><a href="javascript:;" data-toggle="modal" data-target="#exampleModal">Login to admin</a></span>
 							<button type="submit" class="btn btn-default">Login</button>
 						</form>
 					</div><!--/login form-->
@@ -346,11 +346,34 @@
 				</div>
 			</div>
 		</div>
-		
-	</footer><!--/Footer-->
-	
 
-  
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Login to admin</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form th:action="@{/login}" method="post" th:object="${customer}">
+					<div class="modal-body">
+
+							<input th:field="*{username}" type="text" placeholder="UserName" />
+							<input th:field="*{password}" type="password" placeholder="PassWord" />
+
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary" style="margin-bottom: 16px">Login</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</footer><!--/Footer-->
+
+
     <script src="/js/jquery.js"></script>
 	<script src="/js/price-range.js"></script>
     <script src="/js/jquery.scrollUp.min.js"></script>
